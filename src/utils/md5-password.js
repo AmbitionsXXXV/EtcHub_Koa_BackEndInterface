@@ -2,8 +2,7 @@ const crypto = require('crypto')
 
 function md5password(password) {
   const md5 = crypto.createHash('md5')
-
-  const md5pwd =  md5.update(password).digest('hex')
+  const md5pwd = md5.update(password).digest('hex')
 
   return md5pwd
 }
