@@ -5,20 +5,12 @@ const verifyUser = async (ctx, next) => {
   // 1 验证用户名和密码是否为空
   const { name, password } = ctx.request.body
   if (!name || !password) {
-    ctx.body = {
-      code: -1001,
-      message: '用户名或密码不能为空!'
-    }
-    return
+    return ctx.app.emit('error', 'name or password is required', ctx)
   }
   // 2 判断name是否已经在数据库中存在
   const users = await userService.findUserByName(name)
   if (users.length) {
-    ctx.body = {
-      code: -1002,
-      message: '用户名已被注册'
-    }
-    return
+    return ctx.app.emit('error', 'name already exists', ctx)
   }
 
   // 3.执行下一个中间件
