@@ -1,3 +1,7 @@
+const { 
+  NAME_OR_PASSWORD_IS_REQUIRED,
+  NAME_IS_ALREADY_EXISTS
+} = require('../config/error')
 const app = require('../app')
 
 app.on('error', (error, ctx) => {
@@ -5,11 +9,11 @@ app.on('error', (error, ctx) => {
   let message = ''
 
   switch (error) {
-    case 'name or password is required':
+    case NAME_OR_PASSWORD_IS_REQUIRED:
       code = -1001
       message = '用户名或密码不能为空'
       break
-    case 'name is already exists':
+    case NAME_IS_ALREADY_EXISTS:
       code = -1002
       message = '用户名已存在'
       break
