@@ -1,6 +1,8 @@
+const connection = require('../app/database')
+
 class UserService {
   create(user) {
-    console.log('将user对象保存到数据库中')
+    // connection.execute()
   }
 }
 
