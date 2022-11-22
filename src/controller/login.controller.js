@@ -16,10 +16,6 @@ class LoginController {
     // 3.返回用户信息
     ctx.body = { code: 0, data: { id, name, token } }
   }
-
-  test(ctx, next) {
-    ctx.body = `可以访问/login/test接口`
-  }
 }
 
 module.exports = new LoginController()

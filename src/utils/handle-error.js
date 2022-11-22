@@ -1,5 +1,11 @@
 const app = require('../app')
-const { NAME_OR_PASSWORD_IS_REQUIRED, NAME_IS_ALREADY_EXISTS, NAME_IS_NOT_EXISTS, PASSWORD_IS_INCORRECT } = require('../config/error')
+const { 
+  NAME_OR_PASSWORD_IS_REQUIRED, 
+  NAME_IS_ALREADY_EXISTS, 
+  NAME_IS_NOT_EXISTS, 
+  PASSWORD_IS_INCORRECT,
+  UN_AUTHORIZATION 
+} = require('../config/error')
 
 app.on('error', (error, ctx) => {
   let code = 0
@@ -21,6 +27,10 @@ app.on('error', (error, ctx) => {
     case PASSWORD_IS_INCORRECT:
       code = -1004
       message = '密码输入错误，请确认密码是否输入正确'
+      break
+    case UN_AUTHORIZATION:
+      code = -1005
+      message = 'Token无效或已过期'
       break
   }
 
