@@ -6,7 +6,6 @@ class LoginController {
     // 1.获取用户信息
     const { id, name } = ctx.user
 
-    console.log(PRIVATE_KEY)
     // 2.颁发令牌token
     const token = jwt.sign({ id, name }, PRIVATE_KEY, {
       expiresIn: 24 * 60 * 60,
@@ -15,6 +14,11 @@ class LoginController {
 
     // 3.返回用户信息
     ctx.body = { code: 0, data: { id, name, token } }
+  }
+
+
+  test(ctx, next) {
+    ctx.body = `验证身份通过~`
   }
 }
 

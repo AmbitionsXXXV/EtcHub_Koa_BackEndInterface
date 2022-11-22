@@ -4,6 +4,7 @@ const {
   PASSWORD_IS_INCORRECT,
   UN_AUTHORIZATION 
 } = require("../config/error")
+const jwt = require('jsonwebtoken')
 const { PUBLIC_KEY } = require('../config/secret')
 const userService = require("../service/user.service")
 const md5password = require("../utils/md5-password")
@@ -38,6 +39,9 @@ const verifyLogin = async (ctx, next) => {
 const verifyAuth = async (ctx, next) => {
   // 1.获取token
   const authorization = ctx.headers.authorization
+  if (!authorization) {
+    return ctx.app.emit('error', UN_AUTHORIZATION, ctx)
+  }
   const token = authorization.replace('Bearer ', '')
 
   // 2.验证token是否有效
