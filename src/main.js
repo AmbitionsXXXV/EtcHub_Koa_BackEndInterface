@@ -10,5 +10,4 @@ app.listen(SERVER_PORT, () => {
 
 app.on("error",(err,ctx)=>{//捕获异常记录错误日志
   console.log(new Date(),":[info] err:",err);
-
 });

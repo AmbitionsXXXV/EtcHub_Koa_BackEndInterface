@@ -74,6 +74,35 @@ class MomentController {
       data: result
     }
   }
+
+  // 为moment添加label
+  async addLabels(ctx, next) {
+    // 1.获取一些参数
+    const { labels } = ctx
+    const { momentId } = ctx.params
+
+    // 2.将moment_id和label_id添加moment_label关系表
+    try {
+      for (const label of labels) {
+        // 2.1.判断label_id是否已经和moment_id已经存在该数据
+        const isExists = await momentService.hasLabel(momentId, label.id)
+        if (!isExists) {
+          // 2.2.不存该moment_id和label_id的关系数据
+          const result = await momentService.addLabel(momentId, label.id)
+        }
+      }
+
+      ctx.body = {
+        code: 0,
+        message: '为动态添加标签成功~'
+      }
+    } catch (error) {
+      ctx.body = {
+        code: -3001,
+        message: '为动态添加标签失败, 请检测数据有问题~'
+      }
+    }
+  }
 }
 
 module.exports = new MomentController()
