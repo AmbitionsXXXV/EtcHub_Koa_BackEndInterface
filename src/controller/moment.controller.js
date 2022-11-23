@@ -31,6 +31,20 @@ class MomentController {
       data: result
     }
   }
+
+  async detail(ctx, next) {
+    // 1.获取动态id
+    const { momentId } = ctx.params
+
+    // 2.根据id查询动态详情
+    const result = await momentService.queryById(momentId)
+
+    // 返回数据
+    ctx.body = {
+      code: 0,
+      data: result[0]
+    }
+  }
 }
 
 module.exports = new MomentController()
