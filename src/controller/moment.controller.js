@@ -45,6 +45,20 @@ class MomentController {
       data: result[0]
     }
   }
+
+  async update(ctx, next) {
+    // 1.获取要修改动态的动态Id
+    const { momentId } = ctx.params
+    // 2.修改的内容
+    const { content } = ctx.request.body
+    // 3.执行数据库操作
+    const result = await momentService.update(content, momentId)
+    ctx.body = {
+      code: 0, 
+      message: '动态修改成功',
+      data: result
+    }
+  }
 }
 
 module.exports = new MomentController()
