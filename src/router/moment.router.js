@@ -6,6 +6,6 @@ const momentRouter = new KoaRouter({ prefix: '/moment' })
 
 // 接口
 momentRouter.post('/', verifyAuth, create)
-momentRouter.get('', list)
+momentRouter.get('/', list)
 
 module.exports = momentRouter

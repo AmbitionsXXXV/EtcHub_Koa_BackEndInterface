@@ -6,6 +6,12 @@ class MomentService {
     const [result] = await connection.execute(statement, [content, userId])
     return result
   }
+
+  async queryList() {
+    const statement = 'SELECT * FROM moment;'
+    const [result] = await connection.execute(statement)
+    return result
+  }
 }
 
 module.exports = new MomentService()

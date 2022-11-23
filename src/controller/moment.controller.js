@@ -19,7 +19,14 @@ class MomentController {
   }
 
   async list(ctx, next) {
-    
+    // 从数据库中查询动态列表
+    const result = await momentService.queryList()
+
+    // 返回数据
+    ctx.body = { 
+      code: 0, 
+      data: result
+    }
   }
 }
 
