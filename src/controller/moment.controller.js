@@ -46,6 +46,20 @@ class MomentController {
     }
   }
 
+  async remove(ctx, next) {
+    // 1.获取删除动态的id
+    const { momentId } = ctx.params
+
+    // 2.执行数据库操作
+    const result = await momentService.remove(momentId)
+
+    ctx.body = {
+      code: 0, 
+      message: '动态删除改成功',
+      data: result
+    }
+  }
+
   async update(ctx, next) {
     // 1.获取要修改动态的动态Id
     const { momentId } = ctx.params
@@ -53,6 +67,7 @@ class MomentController {
     const { content } = ctx.request.body
     // 3.执行数据库操作
     const result = await momentService.update(content, momentId)
+
     ctx.body = {
       code: 0, 
       message: '动态修改成功',
