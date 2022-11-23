@@ -19,8 +19,11 @@ class MomentController {
   }
 
   async list(ctx, next) {
+    // 获取offset/size
+    const { offset, size } = ctx.query
+
     // 从数据库中查询动态列表
-    const result = await momentService.queryList()
+    const result = await momentService.queryList(offset, size)
 
     // 返回数据
     ctx.body = { 

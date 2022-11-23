@@ -7,9 +7,16 @@ class MomentService {
     return result
   }
 
-  async queryList() {
-    const statement = 'SELECT * FROM moment;'
-    const [result] = await connection.execute(statement)
+  async queryList(offset = 0, size = 10) {
+    const statement = `
+    SELECT 
+      m.id id, m.content content, m.createAt createTime, m.updateAt updateTime,
+      JSON_OBJECT('id', u.id, 'name', u.name, 'createTime', u.createAt, 'updateTime', u.updateAt) users
+    FROM moment m
+    LEFT JOIN users u ON u.id = m.users_id
+    LIMIT ? OFFSET ?;
+    `
+    const [result] = await connection.execute(statement, [String(size), String(offset)])
     return result
   }
 }
