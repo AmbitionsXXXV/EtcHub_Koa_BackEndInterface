@@ -1,5 +1,5 @@
 const KoaRouter = require('@koa/router')
-const { create } = require('../controller/user.controller')
+const { create, showAvatarImage } = require('../controller/user.controller')
 const { verifyUser, handlePassword } = require('../middleware/user.middleware')
 
 // 1.创建路由对象
@@ -10,7 +10,6 @@ const userRouter = new KoaRouter({ prefix: '/users' })
 userRouter.post('/', verifyUser, handlePassword , create)
 // 2.2.为用户提供头像
 userRouter.get('/avatar/:userId', showAvatarImage)
-
 
 // 3.导出路由
 module.exports = userRouter
