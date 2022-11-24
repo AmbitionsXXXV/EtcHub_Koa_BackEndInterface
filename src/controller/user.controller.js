@@ -14,6 +14,19 @@ class UserController {
       data: result
     }
   }
+
+  async showAvatarImage(ctx, next) {
+    // 1.获取用户的id
+    const { userId } = ctx.params
+
+    // 2.获取userId对应的头像信息
+    const avatarInfo = await fileService.queryAvatarWithUserId(userId)
+
+    // 3.读取头像所在的文件
+    const { filename, mimetype } = avatarInfo
+    ctx.type = mimetype
+    ctx.body = fs.createReadStream(`${UPLOAD_PATH}/${filename}`)
+  }
 }
 
 module.exports = new UserController()
